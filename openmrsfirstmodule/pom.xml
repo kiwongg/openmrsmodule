@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.openmrs.module</groupId>
+	<artifactId>helloworld</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Hello World Module</name>
+	<description>A simple Hello World module for OpenMRS</description>
+	<url>https://wiki.openmrs.org</url>
+
+	<modules>
+		<module>api</module>
+		<module>omod</module>
+	</modules>
+
+	<properties>
+		<openMRSVersion>2.4.0</openMRSVersion>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javaCompilerVersion>1.8</javaCompilerVersion>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- OpenMRS core -->
+			<dependency>
+				<groupId>org.openmrs.api</groupId>
+				<artifactId>openmrs-api</artifactId>
+				<version>${openMRSVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.web</groupId>
+				<artifactId>openmrs-web</artifactId>
+				<version>${openMRSVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>webservices.rest-omod</artifactId>
+				<version>2.9</version>
+				<scope>provided</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.openmrs.module</groupId>
+				<artifactId>webservices.rest-omod-common</artifactId>
+				<version>2.9</version>
+				<scope>provided</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<target>${javaCompilerVersion}</target>
+						<source>${javaCompilerVersion}</source>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://openmrs.jfrog.io/openmrs/public</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>openmrs-repo</id>
+			<name>OpenMRS Nexus Repository</name>
+			<url>https://openmrs.jfrog.io/openmrs/public</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>

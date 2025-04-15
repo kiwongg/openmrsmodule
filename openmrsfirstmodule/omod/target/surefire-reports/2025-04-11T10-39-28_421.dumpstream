@@ -1,0 +1,5 @@
+# Created at 2025-04-11T10:39:36.941
+Boot Manifest-JAR contains absolute paths in classpath 'E:\FinalProject\openmrsfirstmodule\omod\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

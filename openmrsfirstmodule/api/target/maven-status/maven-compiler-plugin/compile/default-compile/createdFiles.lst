@@ -1,0 +1,3 @@
+org\openmrs\module\helloworld\api\repository\GreetingRepository.class
+org\openmrs\module\helloworld\HelloWorldActivator.class
+org\openmrs\module\helloworld\api\model\Greeting.class
