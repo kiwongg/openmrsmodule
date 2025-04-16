@@ -1,21 +1,20 @@
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
-                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
-                  http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-    <changeSet id="helloworld-1" author="asmit">
-        <preConditions onFail="MARK_RAN">
-            <not>
-                <tableExists tableName="greeting"/>
-            </not>
-        </preConditions>
-        <createTable tableName="greeting">
-            <column name="id" type="bigint" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+    <changeSet id="helloworld-uuid" author="asmit">
+        <createTable tableName="greetings">
+            <column name="uuid" type="CHAR(36)">
+                <constraints primaryKey="true" nullable="false" unique="true"/>
             </column>
-            <column name="message" type="varchar(255)">
+            <column name="message" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_at" type="DATETIME"/>
+            <column name="updated_at" type="DATETIME"/>
+            <column name="deleted_at" type="DATETIME"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>

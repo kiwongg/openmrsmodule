@@ -1,34 +1,76 @@
 package org.openmrs.module.helloworld.api.model;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Entity
-@Table(name = "greeting")
+@Table(name = "greetings")
 public class Greeting {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(columnDefinition = "CHAR(36)")
+    private String uuid;
 
     @Column(nullable = false)
     private String message;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
 
-    // Constructors
-    public Greeting() {}
-    public Greeting(Integer id, String message) {
-        this.id = id;
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @Column(name = "deleted_at")
+    private LocalDateTime deletedAt;
+
+    public Greeting() {
+        this.uuid = UUID.randomUUID().toString();
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public Greeting(String message) {
+        this();
         this.message = message;
     }
 
     // Getters and Setters
-    public Integer getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
-    public void setId(Integer id) {
-        this.id = id;
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
+
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public LocalDateTime getDeletedAt() {
+        return deletedAt;
+    }
+
+    public void setDeletedAt(LocalDateTime deletedAt) {
+        this.deletedAt = deletedAt;
     }
 }

@@ -1,3 +1,6 @@
+org\openmrs\module\helloworld\api\exception\GreetingNotFoundException.class
+org\openmrs\module\helloworld\api\service\GreetingService.class
 org\openmrs\module\helloworld\api\repository\GreetingRepository.class
 org\openmrs\module\helloworld\HelloWorldActivator.class
 org\openmrs\module\helloworld\api\model\Greeting.class
+org\openmrs\module\helloworld\api\dao\GreetingDAO.class

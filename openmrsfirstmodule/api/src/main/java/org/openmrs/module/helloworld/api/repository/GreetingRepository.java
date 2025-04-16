@@ -1,46 +1,46 @@
 package org.openmrs.module.helloworld.api.repository;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.Session;
 import org.openmrs.module.helloworld.api.model.Greeting;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Component;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.*;
+import java.util.stream.Collectors;
 
-@Repository
-@Transactional
+@Component
 public class GreetingRepository {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    private static final Map<String, Greeting> greetings = new HashMap<>();
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public List<Greeting> findAll() {
+        return greetings.values().stream()
+                .filter(g -> g.getDeletedAt() == null)
+                .collect(Collectors.toList());
     }
 
-    private Session getSession() {
-        return sessionFactory.getCurrentSession();
+    public Optional<Greeting> findByUuid(String uuid) {
+        Greeting greeting = greetings.get(uuid);
+        return (greeting != null && greeting.getDeletedAt() == null)
+                ? Optional.of(greeting) : Optional.empty();
     }
 
     public Greeting save(Greeting greeting) {
-        getSession().saveOrUpdate(greeting);
+        if (greeting.getUuid() == null) {
+            greeting.setUuid(UUID.randomUUID().toString());
+            greeting.setCreatedAt(LocalDateTime.now());
+        }
+        greeting.setUpdatedAt(LocalDateTime.now());
+        greetings.put(greeting.getUuid(), greeting);
         return greeting;
     }
 
-    public Greeting findById(Integer id) {
-        return getSession().get(Greeting.class, id);
-    }
-
-    public List<Greeting> findAll() {
-        return getSession().createQuery("FROM Greeting", Greeting.class).list();
-    }
-
-    public void delete(Integer id) {
-        Greeting greeting = findById(id);
-        if (greeting != null) {
-            getSession().delete(greeting);
+    public boolean delete(String uuid) {
+        Greeting greeting = greetings.get(uuid);
+        if (greeting != null && greeting.getDeletedAt() == null) {
+            greeting.setDeletedAt(LocalDateTime.now());
+            greetings.put(uuid, greeting);
+            return true;
         }
+        return false;
     }
 }

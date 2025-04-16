@@ -23,4 +23,7 @@
   		    http://www.springframework.org/schema/util
   		    http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
+    <bean id="greetingDAO" class="org.openmrs.module.helloworld.api.dao.GreetingDAO" />
+    <bean id="greetingService" class="org.openmrs.module.helloworld.api.service.GreetingService" />
+
 </beans>
